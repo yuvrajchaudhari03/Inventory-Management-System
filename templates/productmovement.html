@@ -1,0 +1,185 @@
+{% include "layout.html" %} 
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<body>
+<div class="container">
+<h2>Product Movememnts to/from Warehouse</h2>
+
+<p>The select element defines a drop-down list:</p>
+
+<form name="addproductmovement" id="addproductmovement" action = "/addproductmovement" method="post" novalidate>
+  <label for="Product">Choose Product:</label>
+  <select id="p_name" name="p_name">
+  	{% for item in data %}
+    <option  name="p_name">{{item.p_name}}</option>
+     {% endfor %}
+  </select>
+
+  <label for="Location">From Location:</label>
+  <select id="fromlocation" name="fromlocation">
+  	{% for a in data1 %}
+    <option  name="fromlocation">{{a.loc_name}}</option>
+     {% endfor %}
+  </select>
+
+  <label for="cars">To Location:</label>
+  <select id="tolocation" name="tolocation">
+  	{% for item in data1  %}
+    <option  name="tolocation">{{item.loc_name}}</option>
+     {% endfor %}
+  </select>
+  <label for="cars">Quantity:</label>
+  <input type="text" name="quantity" placeholder="Enter Quantity">
+
+  <input class="btn btn-primary" type="submit">
+</form>
+</div>
+</body>
+
+<h1 style="margin-left: 50px">------------------------------------------------------------------</h1>
+<div class="container">
+  <table class="table">
+    <h3>List of Movements</h3>
+    <thead>
+      <th scope="col">Name of Product</th>
+      <th scope="col">From Location</th>
+      <th scope="col">To Location</th>
+      <th scope="col">Date and time</th>
+      <th scope="col">Quantity</th>
+    </thead>
+
+    <tbody>
+    {% for item2 in data2%}
+
+    <tr>
+        <td>{%for r in data%}
+                 {% if (r.product_id==item2.product_id) %}
+                    {{r.p_name}}
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td>{{item2.from_location}}</td>
+        <td>{{item2.to_location}}</td>
+        <td>{{item2.timestamp}}</td>
+        <td>{{item2.qty}}</td>
+      
+        <td><a href="/productmovementedit/{{item2.movement_id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{item2.movement_id}}">Edit</a></td>
+       <td> <a href="/productmovementdelete/{{item2.movement_id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a></td>
+
+ {% endfor%}
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+</body>
+
+{% for item2 in data2 %}
+
+<div id="modaledit{{item2.movement_id}}" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="/productmovementedit" method="POST">
+
+
+               <div class="form-group">
+
+
+
+                   <input type="hidden"  name="movement_id" value="{{item2.movement_id}}">
+
+                 <label>From Location:</label>
+                  <select id="fromlocation" name="fromloc">
+                    {% for item1 in data1 %}
+                      {%if item1.loc_name==item2.from_location %}
+                        <option  name="fromlocation1" selected="true" >{{item2.from_location}}</option>                      
+                      {% else %}
+                        <option  name="fromlocation" >{{item1.loc_name}}</option>
+                      {% endif %}
+                    {% endfor %}    
+                  </select>
+
+                 <label>To Location:</label>
+                  <select id="tolocation" name="toloc" >
+                    {% for item1 in data1 %}
+                    {%if item1.loc_name==item2.to_location %}
+                        <option  name="to_location1" selected="true" >{{item2.to_location}}</option>                      
+                      {% else %}
+                        <option  name="to_location" >{{item1.loc_name}}</option>
+                      {% endif %}
+                     {% endfor %}
+                  </select>
+
+                 <label>Quantity:</label>
+                  <input type="text" class="form-control" name="qty" value="{{item2.qty}}">
+
+
+               </div>
+
+
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+<div>
+</div>
+</html>
+{% endfor%}
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+
+
+{% endblock %}

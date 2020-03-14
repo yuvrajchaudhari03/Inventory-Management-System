@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+  #add{
+    padding: 23px;
+  }
+</style>
+<head>
+  <title>Add Product</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+{% block content %}
+<body>
+<div class="container">
+  <h2>Add / View / Delete Location</h2>
+  <p>Add New Location name</p>
+  <form name="addLocation" id="contactForm" action = "/addlocation" method="post" novalidate>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <label for="ex1">Location Name</label>
+        <input class="form-control" id="ex1" name="loc_name" type="text" placeholder="Enter Location Name">
+      </div>
+      <div id="add" style="margin-top: 25px ">
+        <button type="submit" class="btn btn-primary" id="sendMessageButton">Add</button>
+      </div>
+      
+    </div>
+  </form>
+</div>
+</body>
+<div class="container">
+  <table class="table">
+    <h3>List of Locations</h3>
+    <thead>
+      <th scope="col">Name of Location</th>
+    </thead>
+    <tbody>
+      {% for item in data %}
+      <tr>
+        <td>{{item.loc_name}}</td>
+        <td><a href="/locationedit/{{item.location_id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{item.location_id}}">Edit</a></td>
+        <td> <a href="/locationdelete/{{item.location_id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a></td>
+      {% endfor%}
+      </tr>
+    </tbody>
+  </table>
+{% for item in data %}
+</div>
+</body>
+<div id="modaledit{{item.location_id}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Update Information</h4>
+         </div>
+         <div class="modal-body">
+            <form action="/locationedit" method="POST">
+               <div class="form-group">
+                  <label>Name:</label>
+                   <input type="hidden"  name="location_id" value="{{item.location_id}}">
+                  <input type="text" class="form-control" name="loc_name" value="{{item.loc_name}}">
+               </div>
+               <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Update</button>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+</html>
+{% endfor%}
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+
+{% endblock %}

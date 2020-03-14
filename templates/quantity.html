@@ -1,0 +1,68 @@
+{% include "layout.html" %} 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+*{
+	box-sizing: border-box;
+}
+body
+{
+    counter-reset: Count-Value;     
+}
+table
+{
+    border-collapse: separate;
+}
+tr td:first-child:before
+{
+  counter-increment: Count-Value;   
+  content:counter(Count-Value);
+}
+</style>
+{% block content %}
+<body class="container" style="margin-top: 50px;">
+
+	<h2 style="margin-bottom: 50px">Product Quantity in Warehouse</h2>
+	<table class="table table-hover table-darks">
+	  <thead>
+	    <tr>
+	      <th scope="col">Sr. No</th>
+	      <th scope="col">Product Name</th>
+	      <th scope="col">Warehouse</th>
+	      <th scope="col">Qty</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	{% for item in data %}
+	    <tr>
+	      <td></td>
+	      {%for i in data1%}
+	            {% if (i.product_id==item.product_id) %}
+	      			<td>{{i.p_name}}</td>
+	      		{% endif %}
+	      {% endfor %}
+
+	      {%for j in data2%}
+	            {% if (j.location_id==item.location_id) %}
+	      			<td>{{j.loc_name}}</td>
+	      		{% endif %}
+	      {% endfor %}
+	      <td>{{item[2]}}</td>
+	    </tr>
+	    {%endfor%}
+	    
+	  </tbody>
+	</table>
+</body>
+</html>
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>		
+{% endblock %}

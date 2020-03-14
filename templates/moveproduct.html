@@ -1,0 +1,18 @@
+{% include "layout.html" %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<body>
+<h2>The select Element</h2>t element defines a drop-down list:</p>
+<form action="/action_page.php">
+  <label for="cars">Choose :</label>
+	  {% for item in data %}
+	  <select id="cars" name="cars">
+	    <option value="volvo">{{item.p_name}}</option>
+	  </select>
+	  {% endfor%}
+  <input type="submit">
+</form>
+</body>
+</html>
+{% endblock %}

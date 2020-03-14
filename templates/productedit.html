@@ -1,0 +1,51 @@
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form name="editProduct" id="editForm" action = "/productedit/{{results.pid}}" method="post" novalidate>
+<div class="container">
+  <h2>Product Details</h2>
+  <p></p>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Location</th>
+        <th>Date and Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" class="form-control" value="{{results.p_name}}" name="p_name" /></td>
+        <td> <input type="text" class="form-control" value="{{results.quantity}}" name="quantity" /></td>
+        <td><input type="text" class="form-control" value="{{results.location}}" name="location"/></td>
+        <td>{{results.time}}</td>
+        <td><button type="submit" class="btn btn-primary" id="sendMessageButton">Update</button></td>
+      </tr>
+
+      
+    </tbody>
+    <tbody>
+      
+
+    </tbody>
+  </table>
+
+</div>
+  </form>
+
+</body>
+</html>
+
+{% endblock %}

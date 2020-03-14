@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+  
+  
+</style>
+<head>
+  {% block title %}Add Product{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+{% block content %}
+<body style="background: url('{{ url_for('static', filename='images/Fotolia_70869411_Subscription_Monthly_M.jpg') }}') left center no-repeat; background-size: 1550px; margin-top: 300px; ">
+	
+        
+          <div class="text-center" style="margin-bottom: 100px; margin-left: 100px;">
+          	<table align="text-center" style="width: 00px;  ">
+          		<tr>
+          			<td>
+          				<a href="/addproducts" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px box-shadow: 10px 10px 5px white; ">Products</a>
+          			</td>
+
+          		</tr>
+          		<tr>
+          			<td>
+          				<a href="/addlocation" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px ">Locations</a>
+          			</td>
+          		</tr>
+          		<tr>
+          			<td>
+          				<a href="/productmovement" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px ">Movements</a>
+          			</td>
+          		</tr>	
+          		
+
+          	</table>
+
+        
+        </div>
+</body>
+
+</html>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+{% endblock %}
