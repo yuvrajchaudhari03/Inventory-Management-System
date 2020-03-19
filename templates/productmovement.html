@@ -19,15 +19,17 @@
 
   <label for="Location">From Location:</label>
   <select id="fromlocation" name="fromlocation">
+    <option></option>
   	{% for a in data1 %}
-    <option  name="fromlocation">{{a.loc_name}}</option>
+    <option  >{{a.loc_name}}</option>
      {% endfor %}
   </select>
 
   <label for="cars">To Location:</label>
   <select id="tolocation" name="tolocation">
+    <option ></option>
   	{% for item in data1  %}
-    <option  name="tolocation">{{item.loc_name}}</option>
+    <option>{{item.loc_name}}</option>
      {% endfor %}
   </select>
   <label for="cars">Quantity:</label>

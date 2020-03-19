@@ -40,27 +40,39 @@ tr td:first-child:before
 	    </tr>
 	  </thead>
 	  <tbody>
+	  	
 	  	{% for item in data %}
-	    <tr>
-	      <td></td>
-	      {%for i in data1%}
-	            {% if (i.product_id==item.product_id) %}
-	      			<td>{{i.p_name}}</td>
-	      		{% endif %}
-	      {% endfor %}
+	  		
+				    <tr>
+				      <td></td>
+				      {%for i in data1%}
 
-	      {%for j in data2%}
-	            {% if (j.location_id==item.location_id) %}
-	      			<td>{{j.loc_name}}</td>
-	      		{% endif %}
-	      {% endfor %}
-	      <td>{{item[2]}}</td>
-	    </tr>
+				            {% if (i.product_id==item.product_id) %}
+				      			<td>{{i.p_name}}</td>
+				      		{% endif %}
+				      {% endfor %}
+
+				     
+				      			<td>{{item.to_location}}</td>
+				      		
+				      {%for l in data3 if (l.product_id==item.product_id) and (l.from_location==item.to_location)%}
+	  						
+				      		
+				      			<td>{{(item[3]-l[2])|e }} </td>
+				      			
+				      		{%else%}
+				      			<td>{{item[3] | e}}</td>
+				      			
+				      		
+
+	  					{%endfor%}
+	  	
 	    {%endfor%}
 	    
 	  </tbody>
 	</table>
 </body>
+
 </html>
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
 

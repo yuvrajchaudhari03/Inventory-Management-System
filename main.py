@@ -28,7 +28,7 @@ class Product(db.Model):
     '''
     product_id = db.Column(db.Integer, primary_key=True)
     p_name = db.Column(db.String(80), nullable=False)
-    p_mov= db.relationship("Productmovement",backref='product', lazy='dynamic')
+    p_mov= db.relationship("Productmovement",backref='product1',cascade="save-update, merge, delete", lazy='dynamic')
     
 class Location(db.Model):
     '''
@@ -36,12 +36,12 @@ class Location(db.Model):
     '''
     location_id = db.Column(db.Integer, primary_key=True)
     loc_name = db.Column(db.String(80), nullable=False)
-
+    p_mov1 = db.relationship("Productmovement", backref='product', cascade="save-update, merge, delete", lazy='dynamic')
 class Productmovement(db.Model):
     movement_id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.String(12), nullable=True)
-    from_location = db.Column(db.String(30), nullable=False)
-    to_location = db.Column(db.String(30), nullable=False)
+    from_location = db.Column(db.String(30), nullable=True)
+    to_location = db.Column(db.String(30), nullable=True)
     qty = db.Column(db.String(12), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'), nullable=False)
     location_id = db.Column(db.Integer, db.ForeignKey('location.location_id'), nullable=False)
@@ -83,7 +83,10 @@ def addproductmovement():
         quantity = request.form.get('quantity')
         timestamp = datetime.now()
         results = Product.query.filter_by(p_name=p_name).first_or_404()
-        results1 = Location.query.filter_by(loc_name=to_location).first_or_404()
+        if to_location!=" ":
+            results1 = Location.query.filter_by(loc_name=from_location).first_or_404()
+        else:
+            results1 = Location.query.filter_by(loc_name=to_location).first_or_404()
         product_id=results.product_id
         location_id = results1.location_id
         data = Productmovement(from_location=from_location,to_location=to_location, qty = quantity, timestamp = timestamp, product_id=product_id , location_id=location_id)
@@ -179,8 +182,15 @@ def locationdelete(location_id):
 
 @app.route('/quantity')
 def quantity():
-    results = db.session.query(Productmovement.location_id ,Productmovement.product_id,func.sum(Productmovement.qty)).group_by(Productmovement.to_location, Productmovement.product_id ).order_by(Productmovement.product_id).all()
+    results = db.session.query(Productmovement.location_id ,Productmovement.to_location,Productmovement.product_id,func.sum(Productmovement.qty)).group_by(Productmovement.to_location, Productmovement.product_id ).order_by(Productmovement.product_id).all()
+    results3 = db.session.query(Productmovement.from_location,  Productmovement.product_id,
+                               func.sum(Productmovement.qty)).group_by(Productmovement.from_location,
+                                                                       Productmovement.product_id).order_by(
+        Productmovement.product_id).all()
+
+
     results1=Product.query.all()
     results2 = Location.query.all()
-    return render_template('quantity.html', data=results, data1=results1, data2=results2)
+
+    return render_template('quantity.html', data=results, data1=results1, data2=results2, data3=results3)
 app.run(debug=True)
