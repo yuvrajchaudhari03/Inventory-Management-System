@@ -83,10 +83,15 @@ def addproductmovement():
         quantity = request.form.get('quantity')
         timestamp = datetime.now()
         results = Product.query.filter_by(p_name=p_name).first_or_404()
-        if to_location!=" ":
+        if from_location == None:
+            results1 = Location.query.filter_by(loc_name=to_location).first_or_404()
+            from_location=None
+        elif to_location== None:
             results1 = Location.query.filter_by(loc_name=from_location).first_or_404()
+            to_location = None
         else:
             results1 = Location.query.filter_by(loc_name=to_location).first_or_404()
+
         product_id=results.product_id
         location_id = results1.location_id
         data = Productmovement(from_location=from_location,to_location=to_location, qty = quantity, timestamp = timestamp, product_id=product_id , location_id=location_id)
