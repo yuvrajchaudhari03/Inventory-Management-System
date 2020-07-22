@@ -195,4 +195,7 @@ def quantity():
     results2 = Location.query.all()
 
     return render_template('quantity.html', data=results, data1=results1, data2=results2, data3=results3)
-app.run(debug=True)
+##app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)
