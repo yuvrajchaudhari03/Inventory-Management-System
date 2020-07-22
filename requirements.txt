@@ -19,6 +19,7 @@ mysqlclient==2.0.1
 Naked==0.1.31
 path==14.0.1
 Pillow==7.1.2
+psycopg2==2.8.5
 pycryptodome==3.9.7
 PyMySQL==0.10.0
 pytz==2020.1
