@@ -64,7 +64,7 @@ def addproduct():
     data =Product.query.all()
     return render_template('addproducts.html',data=data)
 
-@app.route("/productmovement",methods = ['POST', 'GET'])
+@app.route("/productmovement",methods = ['GET'])
 def productmovement():
     showproducts = Product.query.all()
     showlocation = Location.query.all()
