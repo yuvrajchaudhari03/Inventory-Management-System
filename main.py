@@ -14,7 +14,8 @@ from mysql.connector import Error
 app = Flask(__name__)
 app.secret_key = 'many random bytes'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:///inventory_system'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:///inventory_system'
+app.config['DATABASE_URL'] = 'mysql:///inventory_system'
 db = SQLAlchemy(app)
 
 
