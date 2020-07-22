@@ -39,7 +39,7 @@ class Location(db.Model):
     p_mov1 = db.relationship("Productmovement", backref='product', cascade="save-update, merge, delete", lazy='dynamic')
 class Productmovement(db.Model):
     movement_id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.String(12), nullable=True)
+    timestamp = db.Column(db.String(400), nullable=True)
     from_location = db.Column(db.String(30), nullable=True)
     to_location = db.Column(db.String(30), nullable=True)
     qty = db.Column(db.String(12), nullable=False)
