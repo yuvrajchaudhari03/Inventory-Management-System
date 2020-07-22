@@ -14,13 +14,10 @@ from mysql.connector import Error
 app = Flask(__name__)
 app.secret_key = 'many random bytes'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/inventory_system'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:///inventory_system'
 db = SQLAlchemy(app)
 
-connection = mysql.connector.connect(host='localhost',
-                                         database='inventory',
-                                         user='root',
-                                         password='')
+
 
 class Product(db.Model):
     '''
