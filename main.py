@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import Table, func, Column, Integer, ForeignKey
 from sqlalchemy.sql import label
+import os
 
 
 from sqlalchemy.orm import relationship
@@ -15,7 +16,8 @@ app = Flask(__name__)
 app.secret_key = 'many random bytes'
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql:///inventory_system'
-app.config['DATABASE_URL'] = 'mysql:///inventory_system'
+#app.config['DATABASE_URL'] = 'mysql:///inventory_system'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 
