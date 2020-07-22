@@ -1,1 +1,1 @@
-web: gunicorn flask-app-inventory.wsgi --log-file -
+web: gunicorn --bind 0.0.0.0:$PORT flaskapp:app
