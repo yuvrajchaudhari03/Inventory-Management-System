@@ -1,1 +1,1 @@
-web: gunicorn app:app --log-file=-
+web: gunicorn flask-app-inventory.wsgi --log-file -
