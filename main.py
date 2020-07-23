@@ -49,9 +49,9 @@ class Productmovement(db.Model):
 class Showproducts(Table):
     pid = db.Column(db.Integer, primary_key=True)
     p_name = db.Column(db.String(80), nullable=False)
-    quantity = db.Column(db.String(12), nullable=False)
+    quantity = db.Column(db.String(20), nullable=False)
     location = db.Column(db.String(120), nullable=False)
-    time = db.Column(db.String(12), nullable=True)
+    time = db.Column(db.String(20), nullable=True)
 @app.route("/")
 def home():
     return render_template('index.html')
