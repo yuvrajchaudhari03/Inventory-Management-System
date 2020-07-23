@@ -39,7 +39,7 @@ class Location(db.Model):
     p_mov1 = db.relationship("Productmovement", backref='product', cascade="save-update, merge, delete", lazy='dynamic')
 class Productmovement(db.Model):
     movement_id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.String(20), nullable=True)
+    timestamp = db.Column(db.String(100), nullable=True)
     from_location = db.Column(db.String(30), nullable=True)
     to_location = db.Column(db.String(30), nullable=True)
     qty = db.Column(db.String(20), nullable=False)
@@ -51,7 +51,7 @@ class Showproducts(Table):
     p_name = db.Column(db.String(80), nullable=False)
     quantity = db.Column(db.String(20), nullable=False)
     location = db.Column(db.String(120), nullable=False)
-    time = db.Column(db.String(20), nullable=True)
+    time = db.Column(db.String(100), nullable=True)
 @app.route("/")
 def home():
     return render_template('index.html')
