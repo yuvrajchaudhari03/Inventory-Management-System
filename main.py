@@ -187,7 +187,7 @@ def locationdelete(location_id):
 
 @app.route('/quantity')
 def quantity():
-    results = db.session.query(Productmovement.location_id ,Productmovement.to_location,Productmovement.product_id,func.sum(Productmovement.qty)).group_by(Productmovement.to_location, Productmovement.product_id ).order_by(Productmovement.product_id).all()
+    results = db.session.query(Productmovement.location_id ,Productmovement.to_location,Productmovement.product_id,func.sum(Productmovement.qty)).group_by(Productmovement.to_location, Productmovement.product_id, Productmovement.location_id).order_by(Productmovement.product_id).all()
     results3 = db.session.query(Productmovement.from_location,  Productmovement.product_id,
                                func.sum(Productmovement.qty)).group_by(Productmovement.from_location,
                                                                        Productmovement.product_id).order_by(
