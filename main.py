@@ -94,10 +94,13 @@ def addproductmovement():
 
         product_id=results.product_id
         location_id = results1.location_id
+        '''
         results2 = db.session.query(Productmovement.location_id, Productmovement.product_id,
                                     func.sum(Productmovement.qty)).group_by(Productmovement.to_location,
                                                                             Productmovement.product_id).order_by(
             Productmovement.product_id).filter_by(to_location=from_location, product_id=product_id).first()
+            '''
+        results2 = db.session.query(Productmovement.location_id ,Productmovement.to_location,Productmovement.product_id,func.sum(Productmovement.qty)).group_by(Productmovement.to_location, Productmovement.product_id, Productmovement.location_id).order_by(Productmovement.product_id)filter_by(to_location=from_location, product_id=product_id).first()
         if (results2[2] < int(quantity)):
             flash("Low Quantity!!")
         else:
