@@ -2,18 +2,21 @@
 {% block content %}
 <!DOCTYPE html>
 <html>
-
 <body>
 <div class="container">
-  {% with messages = get_flashed_messages() %}
+ {% with messages = get_flashed_messages() %}
          {% if messages %}
                {% for message in messages %}
-    <div class="alert alert-danger alert-dismissible mx-2" role="alert">
-  <strong>{{ message }}</strong> Enter Quantity Not Available in Warehouse.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+                 <div class="alert alert-danger alert-dismissible mx-2" role="alert">
+                      <strong>{{ message }}</strong> Enter Quantity Not Available in Warehouse.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+               {% endfor %}
+         {% endif %}
+ {% endwith %}
+  
 <h2>Product Movememnts to/from Warehouse</h2>
 
 <p>The select element defines a drop-down list:</p>
