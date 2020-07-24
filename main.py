@@ -101,7 +101,7 @@ def addproductmovement():
             Productmovement.product_id).filter_by(to_location=from_location, product_id=product_id).first()
             '''
         results2 = db.session.query(Productmovement.location_id ,Productmovement.to_location,Productmovement.product_id,func.sum(Productmovement.qty)).group_by(Productmovement.to_location, Productmovement.product_id, Productmovement.location_id).order_by(Productmovement.product_id).filter_by(to_location=from_location, product_id=product_id).first()
-        if (results2[2] < int(quantity)):
+        if (results2[3] < int(quantity)):
             flash("Low Quantity!!")
         else:
             data = Productmovement(from_location=from_location,to_location=to_location, qty = quantity, timestamp = timestamp, product_id=product_id , location_id=location_id)
