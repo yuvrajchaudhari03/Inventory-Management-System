@@ -54,6 +54,7 @@
 
 <h1 style="margin-left: 50px">------------------------------------------------------------------</h1>
 <div class="container">
+ <form method="post" action="/multipledelete">
   <table class="table">
     <h3>List of Movements</h3>
     <thead>
@@ -68,6 +69,7 @@
     {% for item2 in data2%}
 
     <tr>
+     <td><input type="checkbox" id="checkItem" name="movement_id" aria-label="Checkbox for following text input" value="{{item2.movement_id}}"></td>
         <td>{%for r in data%}
                  {% if (r.product_id==item2.product_id) %}
                     {{r.p_name}}
@@ -84,10 +86,10 @@
 
  {% endfor%}
     </tr>
-
+<tr><td colspan="7" style="text-align:center" ><a><button type="submit" class="btn btn-primary btn-sm">Delete Selected</button></a></td></tr>
     </tbody>
   </table>
-
+</form>
 </div>
 
 </body>
@@ -194,6 +196,11 @@
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
 
 <script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+<script type="text/javascript">
+$("#checkAll").click(function () {
+     $('input:checkbox').not(this).prop('checked', this.checked);
+ });
+</script>
 
 
 {% endblock %}
