@@ -1,6 +1,9 @@
 # Inventory-Management-System
 #Screenshots
 #Home Page
+
+This project deploy on Heroku.
+Please visit this URL : https://flask-app-inventory.herokuapp.com/ 
 ![Home](https://user-images.githubusercontent.com/52877982/77221696-0d314d00-6b72-11ea-8558-b52c95f35857.png)
 
 #products
