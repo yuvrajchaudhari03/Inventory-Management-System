@@ -139,6 +139,15 @@ def productmovementdelete(movement_id):
     db.session.commit()
     return redirect('/productmovement')
 
+@app.route("/multipledelete",methods=['GET','POST'])
+def multipledelete():
+    if request.method == "POST":
+        if request.form["movement_id"]:
+            movement_id = request.form.getlist('movement_id')
+            Productmovement.query.filter(Productmovement.movement_id.in_(movement_id)).delete(synchronize_session=False)
+            db.session.commit()
+            return redirect('/productmovement')
+
 @app.route("/showproducts/", methods=['GET','POST'])
 def showproduct_route():
     showproducts=Addproducts.query.all()
