@@ -1,9 +1,9 @@
 # Inventory-Management-System
 
 
-This project deploy on Heroku.
+##This project deploy on Heroku please check it out.
 
-Please visit this URL : https://flask-app-inventory.herokuapp.com/ 
+###Please visit this URL : https://flask-app-inventory.herokuapp.com/ 
 
 #Screenshots
 #Home Page
