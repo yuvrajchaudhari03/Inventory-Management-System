@@ -29,7 +29,7 @@ shellescape==3.8.1
 six==1.15.0
 SQLAlchemy==1.3.18
 sqlparse==0.3.1
-urllib3==1.25.9
+urllib3==1.26.5
 virtualenv==20.0.21
 virtualenvwrapper-win==1.2.6
 Werkzeug==1.0.1
