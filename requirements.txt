@@ -18,7 +18,7 @@ mysql-connector==2.2.9
 mysqlclient==2.0.1
 Naked==0.1.31
 path==14.0.1
-Pillow==7.1.2
+Pillow==8.2.0
 psycopg2==2.8.5
 pycryptodome==3.9.7
 PyMySQL==0.10.0
